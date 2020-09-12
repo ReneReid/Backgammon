@@ -11,6 +11,7 @@ public class View {
     private JButton rollDieButton;
     private JButton movePieceButton;
     private JButton skipTurnButton;
+    private JButton statsButton;
     private JButton moveRecommButton;
     private JButton updateDisplayButton;
     private JButton doubleGameButton;
@@ -42,6 +43,7 @@ public class View {
         rollDieButton = new JButton("Roll Dice");
         movePieceButton = new JButton("Move Piece");
         skipTurnButton = new JButton("Skip Turn");
+        statsButton = new JButton("Game Stats");
         moveRecommButton = new JButton("Move Recommendation");
         updateDisplayButton = new JButton("Display Updated Board");
         doubleGameButton = new JButton("Double Game's Value");
@@ -82,7 +84,7 @@ public class View {
         horizontalGroupSetUp(layout);
         verticalGroupSetUp(layout);
         layout.linkSize(SwingConstants.HORIZONTAL, newGameButton, rollDieButton, movePieceButton, moveRecommButton,
-                skipTurnButton, doubleGameButton, quitButton);
+                statsButton, doubleGameButton, quitButton);
         return layout;
 
     }
@@ -92,7 +94,7 @@ public class View {
         layout.setHorizontalGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup(GroupLayout.
                 Alignment.LEADING).addComponent(newGameButton).addComponent(rollDieButton).addComponent(movePieceButton)
                 .addComponent(moveRecommButton)
-                .addComponent(skipTurnButton).addComponent(doubleGameButton).addComponent(quitButton))
+                .addComponent(statsButton).addComponent(doubleGameButton).addComponent(quitButton))
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(pieceNumberLabel))
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(pieceNumberTxtField))
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(positionNumberLabel))
@@ -111,7 +113,7 @@ public class View {
                         .addComponent(pieceNumberLabel).addComponent(pieceNumberTxtField).addComponent(positionNumberLabel)
                         .addComponent(positionNumberTxtField))
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(moveRecommButton))
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(skipTurnButton))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(statsButton))
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(doubleGameButton))
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(quitButton)));
         return layout;
@@ -146,6 +148,8 @@ public class View {
     public JButton getSkipTurnButton() {
         return skipTurnButton;
     }
+
+    public JButton getStatsButton() { return statsButton; }
 
     public JButton getMoveRecommButton() {
         return moveRecommButton;

@@ -15,8 +15,11 @@ public class Model {
 
     private int turn;
     private int value;
-    private Scanner input;
+    //private Scanner input;
     private String color = "white";
+    private String prevOfferor = "none";
+    private int blackPoints = 0;
+    private int whitePoints = 0;
 
     private List<Integer> diceList;
     private int numMoves;
@@ -87,6 +90,7 @@ public class Model {
     private JPanel bigBoard;
     private JFrame frame;
     private JFrame diceFrame;
+    private JFrame statsFrame;
 
     private JPanel tri1;
     private JPanel tri2;
@@ -150,12 +154,12 @@ public class Model {
 
     }
 
-    private void init() {
+ /*   private void init() {
 
         board = new Board();
         //turn = 1;
         //value = 1;
-    }
+    }*/
 
     //TODO: can abstract out common code within triPanelSetUp, creating helper functions. Use the triMap data structure
     // will be able to collapse 24 statements into one (hopefully).
@@ -429,7 +433,7 @@ public class Model {
     }
 
 
-    public JPanel leftBoardSetUp() {
+    public void leftBoardSetUp() {
         leftBoard = new JPanel();
         leftBoard.setLayout(new BoxLayout(leftBoard, BoxLayout.Y_AXIS));
         leftBoard.setBackground(Color.darkGray);
@@ -439,17 +443,17 @@ public class Model {
         //String id = getColor() + "'s turn" +  " Dice: " + getDiceList();
         //JLabel diceLabel = new JLabel(id);
         //leftBoard.add(diceLabel);
-        return leftBoard;
+        //return leftBoard;
     }
 
-    public JPanel barBoardSetUp() {
+    public void barBoardSetUp() {
         barBoard = new JPanel();
         barBoard.setLayout(new BoxLayout(barBoard, BoxLayout.Y_AXIS));
         barBoard.setBackground(Color.gray);
         barBoard.setEnabled(true);
         barBoard.setSize(new Dimension(100, 700));
         barBoard.setLocation(310, 10);
-        return barBoard;
+        //return barBoard;
     }
 
     public void rightBoardSetUp() {
@@ -488,6 +492,36 @@ public class Model {
         dicePanel.add(diceLabel);
         diceFrame.add(dicePanel);
     }
+
+    public void statsFrameSetUp() {
+        statsFrame = new JFrame("Tournament Statistics");
+        statsFrame.setLayout(null);
+        statsFrame.getContentPane().setLayout(new BorderLayout());
+        statsFrame.setSize(300, 100);
+        statsFrame.setLocation(1000, 100);
+
+        JPanel statsPanel = new JPanel();
+        statsPanel.setLayout(new BoxLayout(statsPanel, BoxLayout.Y_AXIS));
+        statsPanel.setBackground(Color.cyan);
+        statsPanel.setEnabled(true);
+        statsPanel.setSize(300, 100);
+        String val = "Game value currently: " + value;
+        String prevO =  prevOfferor + " previously doubled game points.";
+        String bTotal = "Black's total points: " + blackPoints;
+        String wTotal = "White's total points: " + whitePoints;
+        JLabel valLabel = new JLabel(val);
+        JLabel prevOLabel = new JLabel(prevO);
+        JLabel bTotLabel = new JLabel(bTotal);
+        JLabel wTotLabel = new JLabel(wTotal);
+        statsPanel.add(valLabel);
+        statsPanel.add(prevOLabel);
+        statsPanel.add(bTotLabel);
+        statsPanel.add(wTotLabel);
+        statsFrame.add(statsPanel);
+
+    }
+
+
 
 // TODO: create a for/while loop for adding objects to the bigBoard. Collapse 24 statements into 1.
     public void bigBoardSetUp() {
@@ -604,6 +638,8 @@ public class Model {
 
     public JFrame getDiceFrame() {return diceFrame;}
 
+    public JFrame getStatsFrame() {return statsFrame;}
+
     public JPanel getLeftBoard() {return leftBoard;}
 
     public JPanel getBarBoard() {return barBoard;}
@@ -651,20 +687,23 @@ public class Model {
     // EFFECT: moves piece to position
     public void movePiece() {
         if (numMoves > 0) {
-            // TODO: print out message re how many moves remaining.
+
             int pieceNumber = Integer.parseInt(getPieceNumber());
             int positionNumber;
             try {
                 Piece chosenPiece = board.getPiece(color, pieceNumber);
 
-                //int distance = Math.abs(chosenPiece.getPlace().getPosition() - positionNumber);
                 int distance = Integer.parseInt(getPositionNumber());
 
                 if (color == "white") {
                     positionNumber = chosenPiece.getPlace().getPosition() + distance;
 
                 } else {
+                    if (chosenPiece.getPlace().getPosition() == 0) {
+                        positionNumber = 25 - distance;
+                    } else {
                     positionNumber = chosenPiece.getPlace().getPosition() - distance;
+                    }
                 }
 
                 if (!diceList.contains(distance)) {
@@ -682,7 +721,7 @@ public class Model {
                             }
 
                         } catch (BlockedMove | PieceOnBarException | NoSuchTriangleNumber e) {
-                            //TODO : EXCEPTION MESSAGE SHOULD RESULT
+
                             JOptionPane.showMessageDialog(null, e.getMessage());
                         }
                     } if (positionNumber == 25) {
@@ -691,12 +730,19 @@ public class Model {
                             diceList.remove(Integer.valueOf(distance));
                             numMoves--;
                             if (board.win(chosenPiece)) {
-                                //TODO: print out victory message
-                                JOptionPane.showMessageDialog(null, color + " has won the game.");
+
+                                if (color == "white") {
+                                    whitePoints += value;
+                                } else {
+                                    blackPoints += value;
+                                }
+
+                                JOptionPane.showMessageDialog(null, color +
+                                        " has won the game worth " + value + " point(s)");
                             }
 
                         } catch (InvalidOffBoardRequest e) {
-                            //TODO: print out exception message
+
                             JOptionPane.showMessageDialog(null, e.getMessage());
                         }
 
@@ -716,7 +762,7 @@ public class Model {
     }
 
 
-
+//TODO: convert this to "Statistics": current games value, previous offeror; tournament points
     public void skipTurn() {
         turn++;
         if (turn%2 == 0) {
@@ -727,10 +773,23 @@ public class Model {
 
     }
 
+/*    public void stats() {
+        JOptionPane.showMessageDialog(null, "Game value currently " + value +
+                "Previous Offeror: " + prevOfferor +
+                "Black's total points: " + blackPoints +
+                "White's total" + whitePoints);
+
+    }*/
+
     public void moveRecomm() {}
 
     public void doubleGame() {
+        if (prevOfferor == color) {
+            JOptionPane.showMessageDialog(null, "Player cannot make two/more consecutive " +
+                    "offers to double game's value.");
+        } else {
         value = value*2;
+        prevOfferor = color;}
     }
 
     public void setPieceNumber(String pieceNumber) {

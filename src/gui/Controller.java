@@ -29,6 +29,7 @@ public class Controller {
         view.getRollDieButton().addActionListener(e -> rollDieAction());
         view.getMovePieceButton().addActionListener(e -> movePieceAction());
         view.getSkipTurnButton().addActionListener(e -> skipTurnAction());
+        view.getStatsButton().addActionListener(e -> statsAction());
         view.getMoveRecommButton().addActionListener(e -> moveRecommAction());
         view.getDoubleGameButton().addActionListener(e -> doubleGameAction());
         view.getQuitButton().addActionListener(e -> quit());
@@ -68,6 +69,12 @@ public class Controller {
         model.skipTurn();
         JOptionPane.showMessageDialog(null, "It's " + model.getColor() +
                 "'s turn to move");
+    }
+
+    private void statsAction() {
+        //model.stats();
+        model.statsFrameSetUp();
+        model.getStatsFrame().setVisible(true);
     }
 
 

@@ -13,6 +13,7 @@ public class Model {
 
     HashMap<Integer, JPanel> triMap = new HashMap<Integer, JPanel>();
 
+    private int game;
     private int turn;
     private int value;
     //private Scanner input;
@@ -116,6 +117,8 @@ public class Model {
     private JPanel tri22;
     private JPanel tri23;
     private JPanel tri24;
+
+    // TODO: try placing all ^ of these objects into an array, and then iterating through the array to set up the board.
 
     private Board board = new Board();
 
@@ -440,10 +443,7 @@ public class Model {
         leftBoard.setEnabled(true);
         leftBoard.setSize(new Dimension(300, 300));
         leftBoard.setLocation(10, 210);
-        //String id = getColor() + "'s turn" +  " Dice: " + getDiceList();
-        //JLabel diceLabel = new JLabel(id);
-        //leftBoard.add(diceLabel);
-        //return leftBoard;
+
     }
 
     public void barBoardSetUp() {
@@ -453,7 +453,6 @@ public class Model {
         barBoard.setEnabled(true);
         barBoard.setSize(new Dimension(100, 700));
         barBoard.setLocation(310, 10);
-        //return barBoard;
     }
 
     public void rightBoardSetUp() {
@@ -497,33 +496,47 @@ public class Model {
         statsFrame = new JFrame("Tournament Statistics");
         statsFrame.setLayout(null);
         statsFrame.getContentPane().setLayout(new BorderLayout());
-        statsFrame.setSize(300, 100);
+        statsFrame.setSize(300, 200);
         statsFrame.setLocation(1000, 100);
 
         JPanel statsPanel = new JPanel();
         statsPanel.setLayout(new BoxLayout(statsPanel, BoxLayout.Y_AXIS));
         statsPanel.setBackground(Color.cyan);
         statsPanel.setEnabled(true);
-        statsPanel.setSize(300, 100);
+        statsPanel.setSize(300, 200);
+
         String val = "Game value currently: " + value;
         String prevO =  prevOfferor + " previously doubled game points.";
-        String bTotal = "Black's total points: " + blackPoints;
-        String wTotal = "White's total points: " + whitePoints;
+        String bTotal = "black total points: " + blackPoints;
+        String wTotal = "white total points: " + whitePoints;
+
         JLabel valLabel = new JLabel(val);
         JLabel prevOLabel = new JLabel(prevO);
         JLabel bTotLabel = new JLabel(bTotal);
         JLabel wTotLabel = new JLabel(wTotal);
+
+        String turns = "Turn number: " + turn;
+        JLabel turnsLabel = new JLabel(turns);
+
+        String gameNum = "Game number: " + game;
+        JLabel gameNumLabel = new JLabel(gameNum);
+
+
         statsPanel.add(valLabel);
         statsPanel.add(prevOLabel);
         statsPanel.add(bTotLabel);
         statsPanel.add(wTotLabel);
+        statsPanel.add(turnsLabel);
+        statsPanel.add(gameNumLabel);
+
         statsFrame.add(statsPanel);
 
     }
 
 
 
-// TODO: create a for/while loop for adding objects to the bigBoard. Collapse 24 statements into 1.
+// TODO: create a for/while loop for adding objects to the bigBoard. Collapse 24 statements into 1. To accomplish, create
+    // TODO: array of tri places.
     public void bigBoardSetUp() {
         bigBoard = new JPanel();
         bigBoard.setLayout(null);
@@ -557,6 +570,9 @@ public class Model {
         bigBoard.setOpaque(true);
     }
 
+
+    // MODIFIES: model
+    // EFFECTS: clears the board - used to give impression of movement
     public void clearBoard() {
         for (Triangle t: board.getTriangleList()) {
             int triNum = t.getPosition();
@@ -565,6 +581,13 @@ public class Model {
             wantedTri.revalidate();
             wantedTri.repaint();
         }
+        rightBoard.removeAll();
+        rightBoard.revalidate();
+        rightBoard.repaint();
+
+        leftBoard.removeAll();
+        leftBoard.revalidate();
+        leftBoard.repaint();
 
         barBoard.removeAll();
         barBoard.revalidate();
@@ -616,7 +639,7 @@ public class Model {
     }
 
 
-    public Board getBoard() {return board;}
+    //public Board getBoard() {return board;}
 
     public String getPieceNumber() {
         return pieceNumber;
@@ -640,11 +663,11 @@ public class Model {
 
     public JFrame getStatsFrame() {return statsFrame;}
 
-    public JPanel getLeftBoard() {return leftBoard;}
+    //public JPanel getLeftBoard() {return leftBoard;}
 
-    public JPanel getBarBoard() {return barBoard;}
+    //public JPanel getBarBoard() {return barBoard;}
 
-    public JPanel getRightBoard() {return rightBoard;}
+    //public JPanel getRightBoard() {return rightBoard;}
 
     public JPanel getBigBoard() {return bigBoard;}
 
@@ -652,8 +675,9 @@ public class Model {
 
 
     public void createBoard() {
-        turn = 1;
+        turn = 0;
         value = 1;
+        game++;
         board.setBlackPieces(new HashSet<>(Arrays.asList(blackPiece1, blackPiece2, blackPiece3, blackPiece4,
                 blackPiece5, blackPiece6, blackPiece7, blackPiece8, blackPiece9, blackPiece10, blackPiece11,
                 blackPiece12, blackPiece13, blackPiece14, blackPiece15)));
@@ -669,9 +693,22 @@ public class Model {
                 triangle14, triangle15, triangle16, triangle17, triangle18, triangle19, triangle20, triangle21,
                 triangle22, triangle23, triangle24)));
 
+        whitePiece11.setHomeStatus(true);
+        whitePiece12.setHomeStatus(true);
+        whitePiece13.setHomeStatus(true);
+        whitePiece14.setHomeStatus(true);
+        whitePiece15.setHomeStatus(true);
+
+        blackPiece11.setHomeStatus(true);
+        blackPiece12.setHomeStatus(true);
+        blackPiece13.setHomeStatus(true);
+        blackPiece14.setHomeStatus(true);
+        blackPiece15.setHomeStatus(true);
+
     }
 
-
+    // Modifies: dice, players' turn.
+    // EFFECTS: produces 2 dice (i.e. randomly selects 2 numbers, each btw 1 and 6), cycles players turn
     public void rollDie() {
         if (turn%2 == 0) {
             color = "black";
@@ -683,62 +720,110 @@ public class Model {
         turn++;
     }
 
+
     // MODIFIES: board, piece
-    // EFFECT: moves piece to position
+    // EFFECT: moves piece to indicated position, unless such move would conflict w/ rules of game
     public void movePiece() {
         if (numMoves > 0) {
 
             int pieceNumber = Integer.parseInt(getPieceNumber());
             int positionNumber;
+
             try {
+
                 Piece chosenPiece = board.getPiece(color, pieceNumber);
 
                 int distance = Integer.parseInt(getPositionNumber());
 
                 if (color == "white") {
+
                     positionNumber = chosenPiece.getPlace().getPosition() + distance;
 
+                    if (positionNumber > 25) {
+
+                        positionNumber = 25;
+                    }
+
                 } else {
+
                     if (chosenPiece.getPlace().getPosition() == 0) {
+
                         positionNumber = 25 - distance;
+
                     } else {
+
                     positionNumber = chosenPiece.getPlace().getPosition() - distance;
+
+                    if (positionNumber < 1) {
+
+                        positionNumber = 25;
+                    }
+
                     }
                 }
 
-                if (!diceList.contains(distance)) {
+//                if (!diceList.contains(distance)) {
+//
+//                    JOptionPane.showMessageDialog(null, "Move does not correspond to dice: " + diceList);
+//
+//                }
 
-                    JOptionPane.showMessageDialog(null, "Move does not correspond to dice: " + diceList);
-                } if (positionNumber < 25) {
+                if (positionNumber < 25) {
+
                         try {
+
                             if (diceList.contains(distance)) {
+
                                 board.movePiece(chosenPiece, board.getTriangle(positionNumber));
                                 diceList.remove(Integer.valueOf(distance));
                                 numMoves--;
-                                JOptionPane.showMessageDialog(null, color + "'s "
+                                JOptionPane.showMessageDialog(null, color
                                         + "piece " + pieceNumber +
                                         " moved to position " + positionNumber);
+                            } else {
+
+                                JOptionPane.showMessageDialog(null, "Move does not correspond to dice: " + diceList);
+
                             }
 
                         } catch (BlockedMove | PieceOnBarException | NoSuchTriangleNumber e) {
 
                             JOptionPane.showMessageDialog(null, e.getMessage());
                         }
-                    } if (positionNumber == 25) {
-                        try {
-                            board.movePieceOffBoard(chosenPiece);
-                            diceList.remove(Integer.valueOf(distance));
-                            numMoves--;
-                            if (board.win(chosenPiece)) {
 
-                                if (color == "white") {
-                                    whitePoints += value;
-                                } else {
-                                    blackPoints += value;
+                    } if (positionNumber >= 25) {
+
+                        try {
+
+
+                            if (diceList.contains(distance)) {
+
+                                board.movePieceOffBoard(chosenPiece);
+                                diceList.remove(Integer.valueOf(distance));
+                                numMoves--;
+                                JOptionPane.showMessageDialog(null, color
+                                        + "piece " + pieceNumber +
+                                        " successfully moved off the board");
+
+                                if (board.win(chosenPiece)) {
+
+                                    if (color == "white") {
+
+                                        whitePoints += value;
+
+                                    } else {
+
+                                        blackPoints += value;
+                                    }
+
+                                    JOptionPane.showMessageDialog(null, color +
+                                            " has won the game worth " + value + " point(s)");
                                 }
 
-                                JOptionPane.showMessageDialog(null, color +
-                                        " has won the game worth " + value + " point(s)");
+                            } else {
+
+                                JOptionPane.showMessageDialog(null, "Move does not correspond to dice: " + diceList);
+
                             }
 
                         } catch (InvalidOffBoardRequest e) {
@@ -752,8 +837,11 @@ public class Model {
                 //TODO: print out exception message
                 //JOptionPane.showMessageDialog(null, e.getMessage());
             }
+
         } JOptionPane.showMessageDialog(null, color + " has " + numMoves + " moves remaining: " + diceList);
+
         if (numMoves == 0) {
+
             JOptionPane.showMessageDialog(null, "out of turns.");
             diceFrame.dispose();
             //turn++;
@@ -762,7 +850,6 @@ public class Model {
     }
 
 
-//TODO: convert this to "Statistics": current games value, previous offeror; tournament points
     public void skipTurn() {
         turn++;
         if (turn%2 == 0) {
@@ -773,13 +860,7 @@ public class Model {
 
     }
 
-/*    public void stats() {
-        JOptionPane.showMessageDialog(null, "Game value currently " + value +
-                "Previous Offeror: " + prevOfferor +
-                "Black's total points: " + blackPoints +
-                "White's total" + whitePoints);
 
-    }*/
 
     public void moveRecomm() {}
 

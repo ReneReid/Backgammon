@@ -17,9 +17,19 @@ public class BlackPiece extends Piece {
             this.place.removePiece(this);
             this.place = p;
             this.place.addPiece(this);
-            if (p instanceof Triangle | p instanceof OffBoard) {
-                this.homeStatus = p.getPosition() <= 6 | p.getPosition() == 25;
-            }
+//            boolean status;
+//            if (p.getPosition() <= 6 && p.getPosition() > 0) {
+//                status = true;
+//            } else if (p.getPosition() >= 25) {
+//                status = true;
+//            } else {
+//                status = false;
+//            }
+//            this.setHomeStatus(status);
+            this.setHomeStatus(p.getPosition() <= 6 && p.getPosition() > 0 || p.getPosition() >= 25);
+//            if (p instanceof Triangle | p instanceof OffBoard) {
+//                this.homeStatus = p.getPosition() <= 6 | p.getPosition() == 25;
+//            }
         }
     }
 

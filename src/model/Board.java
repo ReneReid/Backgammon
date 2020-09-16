@@ -152,14 +152,14 @@ public class Board {
         boolean allStatusHome = true;
         if (piece.getColor().equals("white")) {
             for (WhitePiece wp: whitePieces) {
-                if (!wp.homeStatus) {
+                if (!wp.getHomeStatus()) {
                     allStatusHome = false;
                     break;
                 }
 
             }
 
-        } if (piece.getColor().equals("black")) {
+        } else if (piece.getColor().equals("black")) {
             for (BlackPiece bp: blackPieces) {
                 if (!bp.homeStatus) {
                     allStatusHome = false;
@@ -177,7 +177,11 @@ public class Board {
 
     public void movePieceOffBoard(Piece piece) throws InvalidOffBoardRequest {
         if (canMoveOffBoard(piece)) {
-            theOffBoard.addPiece(piece);
+            //theOffBoard.addPiece(piece);
+            //piece.place = theOffBoard;
+            //piece.getPlace().removePiece(piece);
+            piece.setPlace(theOffBoard);
+
         } else {
             throw new InvalidOffBoardRequest(piece);
         }
@@ -188,7 +192,7 @@ public class Board {
 
 
     //REQUIRES:
-    //MODIFIES: Piece, this
+    //MODIFIES: Piece, this (board)
     //EFFECTS: moves a piece to indicated position (if valid). Throw relevant exception if not valid.
 
     public void movePiece(Piece piece, Triangle t) throws BlockedMove, PieceOnBarException {
@@ -209,6 +213,7 @@ public class Board {
                     piece.setPlace(t);
                     t.removePiece(ip);
                     ip.setPlace(theBar);
+                    //ip.setHomeStatus(false);
                 }
                 if (t.getPieces().size() > 1) {
                     throw new BlockedMove(t);

@@ -40,7 +40,6 @@ public class Triangle extends Place implements Iterable<Piece>{
     public void removePiece(Piece p) {
         if (pieces.contains(p)) {
             pieces.remove(p);
-            //p.setPosition(null);
         }
     }
 

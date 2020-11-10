@@ -1,22 +1,20 @@
 package gui;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.WindowEvent;
 
 public class Controller {
     private Model model;
     private View view;
 
 
-    public Controller(Model m, View v) {
+    Controller(Model m, View v) {
         model = m;
         view = v;
         initView();
     }
 
     // EFFECT: sets up view
-    public void initView() {
+    void initView() {
         view.getPieceNumberTxtField().setText(model.getPieceNumber());
         view.getPositionNumberTxtField().setText(model.getPositionNumber());
     }
@@ -24,7 +22,7 @@ public class Controller {
 
 
     // EFFECT: sets up buttons
-    public void initController() {
+    void initController() {
         view.getNewGameButton().addActionListener(e -> newGameAction());
         view.getRollDieButton().addActionListener(e -> rollDieAction());
         view.getMovePieceButton().addActionListener(e -> movePieceAction());
@@ -46,11 +44,8 @@ public class Controller {
 
     // No user data required to roll; dice roll determined by internal random number generator.
     // EFFECTS: rolls new pair of dice
-    // TODO: remove previous diceFrame when rolling anew.
     private void rollDieAction() {
         model.rollDie();
-        //JOptionPane.showMessageDialog(null, model.getColor() + "'s turn"
-        //        + " Dice: " + model.getDiceList());
         model.diceFrameSetUp();
         model.getDiceFrame().setVisible(true);
 
@@ -100,14 +95,5 @@ public class Controller {
         model.piecesSetUp();
         model.getFrame().setVisible(true);
     }
-
-
-
-
-
-
-
-
-
 
 }

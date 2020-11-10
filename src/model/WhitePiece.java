@@ -21,9 +21,6 @@ public class WhitePiece extends Piece {
             this.place = p;
             this.place.addPiece(this);
             this.setHomeStatus(p.getPosition() >= 19);
-//            if (p instanceof Triangle | p instanceof OffBoard) {
-//                this.setHomeStatus(p.getPosition() >= 19 | p.getPosition() == 25);
-//            }
         }
     }
 

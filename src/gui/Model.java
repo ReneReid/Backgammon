@@ -16,7 +16,6 @@ public class Model {
     private int game;
     private int turn;
     private int value;
-    //private Scanner input;
     private String color = "white";
     private String prevOfferor = "none";
     private int blackPoints = 0;
@@ -28,7 +27,7 @@ public class Model {
     private String pieceNumber;
     private String positionNumber;
 
-    //TODO: collapse statements into one using a for loop
+
     private Triangle triangle1 = new Triangle(1);
     private Triangle triangle2 = new Triangle(2);
     private Triangle triangle3 = new Triangle(3);
@@ -93,62 +92,62 @@ public class Model {
     private JFrame diceFrame;
     private JFrame statsFrame;
 
-    private JPanel tri1;
-    private JPanel tri2;
-    private JPanel tri3;
-    private JPanel tri4;
-    private JPanel tri5;
-    private JPanel tri6;
-    private JPanel tri7;
-    private JPanel tri8;
-    private JPanel tri9;
-    private JPanel tri10;
-    private JPanel tri11;
-    private JPanel tri12;
-    private JPanel tri13;
-    private JPanel tri14;
-    private JPanel tri15;
-    private JPanel tri16;
-    private JPanel tri17;
-    private JPanel tri18;
-    private JPanel tri19;
-    private JPanel tri20;
-    private JPanel tri21;
-    private JPanel tri22;
-    private JPanel tri23;
-    private JPanel tri24;
+    private JPanel tri1 = new JPanel();
+    private JPanel tri2 = new JPanel();
+    private JPanel tri3 = new JPanel();
+    private JPanel tri4 = new JPanel();
+    private JPanel tri5 = new JPanel();
+    private JPanel tri6 = new JPanel();
+    private JPanel tri7 = new JPanel();
+    private JPanel tri8 = new JPanel();
+    private JPanel tri9 = new JPanel();
+    private JPanel tri10 = new JPanel();
+    private JPanel tri11 = new JPanel();
+    private JPanel tri12 = new JPanel();
+    private JPanel tri13 = new JPanel();
+    private JPanel tri14 = new JPanel();
+    private JPanel tri15 = new JPanel();
+    private JPanel tri16 = new JPanel();
+    private JPanel tri17 = new JPanel();
+    private JPanel tri18 = new JPanel();
+    private JPanel tri19 = new JPanel();
+    private JPanel tri20 = new JPanel();
+    private JPanel tri21 = new JPanel();
+    private JPanel tri22 = new JPanel();
+    private JPanel tri23 = new JPanel();
+    private JPanel tri24 = new JPanel();
 
-    // TODO: try placing all ^ of these objects into an array, and then iterating through the array to set up the board.
 
     private Board board = new Board();
 
     public Model(String pieceNumber, String positionNumber) {
         this.pieceNumber = pieceNumber;
         this.positionNumber = positionNumber;
-        triPanel1SetUp();
-        triPanel2SetUp();
-        triPanel3SetUp();
-        triPanel4SetUp();
-        triPanel5SetUp();
-        triPanel6SetUp();
-        triPanel7SetUp();
-        triPanel8SetUp();
-        triPanel9SetUp();
-        triPanel10SetUp();
-        triPanel11SetUp();
-        triPanel12SetUp();
-        triPanel13SetUp();
-        triPanel14SetUp();
-        triPanel15SetUp();
-        triPanel16SetUp();
-        triPanel17SetUp();
-        triPanel18SetUp();
-        triPanel19SetUp();
-        triPanel20SetUp();
-        triPanel21SetUp();
-        triPanel22SetUp();
-        triPanel23SetUp();
-        triPanel24SetUp();
+        //triPanelSetUp(triArray);
+        triPanelSetUpp(tri1, 1);
+        triPanelSetUpp(tri2, 2);
+        triPanelSetUpp(tri3, 3);
+        triPanelSetUpp(tri4, 4);
+        triPanelSetUpp(tri5, 5);
+        triPanelSetUpp(tri6, 6);
+        triPanelSetUpp(tri7, 7);
+        triPanelSetUpp(tri8, 8);
+        triPanelSetUpp(tri9, 9);
+        triPanelSetUpp(tri10, 10);
+        triPanelSetUpp(tri11, 11);
+        triPanelSetUpp(tri12, 12);
+        triPanelSetUpp(tri13, 13);
+        triPanelSetUpp(tri14, 14);
+        triPanelSetUpp(tri15, 15);
+        triPanelSetUpp(tri16, 16);
+        triPanelSetUpp(tri17, 17);
+        triPanelSetUpp(tri18, 18);
+        triPanelSetUpp(tri19, 19);
+        triPanelSetUpp(tri20, 20);
+        triPanelSetUpp(tri21, 21);
+        triPanelSetUpp(tri22, 22);
+        triPanelSetUpp(tri23, 23);
+        triPanelSetUpp(tri24, 24);
         leftBoardSetUp();
         barBoardSetUp();
         rightBoardSetUp();
@@ -157,286 +156,77 @@ public class Model {
 
     }
 
- /*   private void init() {
 
-        board = new Board();
-        //turn = 1;
-        //value = 1;
-    }*/
-
-    //TODO: can abstract out common code within triPanelSetUp, creating helper functions. Use the triMap data structure
-    // will be able to collapse 24 statements into one (hopefully).
-    public void triPanel12SetUp() {
-        tri12 = new JPanel();
-        tri12.setLayout(new BoxLayout(tri12, BoxLayout.Y_AXIS));
-        tri12.setBackground(Color.lightGray);
-        tri12.setEnabled(true);
-        tri12.setSize(new Dimension(50, 200));
-        tri12.setLocation(10, 10);
-        triMap.put(12, tri12);
-    }
-
-    public void triPanel13SetUp() {
-        tri13 = new JPanel();
-        tri13.setLayout(new BoxLayout(tri13, BoxLayout.Y_AXIS));
-        tri13.setBackground(Color.orange);
-        tri13.setEnabled(true);
-        tri13.setSize(new Dimension(50, 200));
-        tri13.setLocation(10, 510);
-        triMap.put(13, tri13);
-    }
+    private JPanel[] triArray = {tri1, tri2, tri3, tri4, tri5, tri6, tri7, tri8, tri9, tri10, tri11, tri12, tri13,
+            tri14, tri15, tri16, tri17, tri18, tri19, tri20, tri21, tri22, tri23, tri24};
 
 
-    public void triPanel11SetUp() {
-        tri11 = new JPanel();
-        tri11.setLayout(new BoxLayout(tri11, BoxLayout.Y_AXIS));
-        tri11.setBackground(Color.orange);
-        tri11.setEnabled(true);
-        tri11.setSize(new Dimension(50, 200));
-        tri11.setLocation(60, 10);
-        triMap.put(11, tri11);
-    }
+    //TODO: trouble shoot null pointer exception when below function run so that
+    // can collapse number of triPanel set up calls.
+//    private void triPanelSetUp(JPanel[] jArray) {
+//        int x;
+//        int y;
+//        int c;
+//        for (int i = 0; i < jArray.length; i++) {
+//            jArray[i].setLayout(new BoxLayout(jArray[i], BoxLayout.Y_AXIS));
+//            if (i%2 == 0) {
+//                jArray[i].setBackground(Color.lightGray);
+//            } else {
+//                jArray[i].setBackground(Color.orange);
+//            }
+//            jArray[i].setEnabled(true);
+//            jArray[i].setSize(new Dimension(50, 200));
+//            if (i <= 6 || i >= 19) {
+//                c = 110;
+//            } else {
+//                c = 10;
+//            }
+//            if (i <= 12) {
+//                x = ((12 - i)*50) + c;
+//                y = 10;
+//            } else {
+//                x = ((i - 13)*50) + c;
+//                y = 510;
+//            }
+//            jArray[i].setLocation(x, y);
+//            triMap.put(i, jArray[i]);
+//        }
+//    }
 
-    public void triPanel14SetUp() {
-        tri14 = new JPanel();
-        tri14.setLayout(new BoxLayout(tri14, BoxLayout.Y_AXIS));
-        tri14.setBackground(Color.lightGray);
-        tri14.setEnabled(true);
-        tri14.setSize(new Dimension(50, 200));
-        tri14.setLocation(60, 510);
-        triMap.put(14, tri14);
-    }
 
-    public void triPanel10SetUp() {
+    // EFFECTS: currently sets up the triangles' parameters and sets them to the board.
+    private void triPanelSetUpp(JPanel tri, int i) {
+        int x;
+        int y;
+        int c;
+        tri.setLayout(new BoxLayout(tri, BoxLayout.Y_AXIS));
+        if (i%2 == 0) {
+            tri.setBackground(Color.lightGray);
 
-        tri10 = new JPanel();
-        tri10.setLayout(new BoxLayout(tri10, BoxLayout.Y_AXIS));
-        tri10.setBackground(Color.lightGray);
-        tri10.setEnabled(true);
-        tri10.setSize(new Dimension(50, 200));
-        tri10.setLocation(110, 10);
-        triMap.put(10, tri10);
-    }
-
-
-    public void triPanel15SetUp() {
-
-        tri15 = new JPanel();
-        tri15.setLayout(new BoxLayout(tri15, BoxLayout.Y_AXIS));
-        tri15.setBackground(Color.orange);
-        tri15.setEnabled(true);
-        tri15.setSize(new Dimension(50, 200));
-        tri15.setLocation(110, 510);
-        triMap.put(15, tri15);
-    }
-
-    public void triPanel9SetUp() {
-
-        tri9 = new JPanel();
-        tri9.setLayout(new BoxLayout(tri9, BoxLayout.Y_AXIS));
-        tri9.setBackground(Color.orange);
-        tri9.setEnabled(true);
-        tri9.setSize(new Dimension(50, 200));
-        tri9.setLocation(160, 10);
-        triMap.put(9, tri9);
-    }
-
-    public void triPanel16SetUp() {
-
-        tri16 = new JPanel();
-        tri16.setLayout(new BoxLayout(tri16, BoxLayout.Y_AXIS));
-        tri16.setBackground(Color.lightGray);
-        tri16.setEnabled(true);
-        tri16.setSize(new Dimension(50, 200));
-        tri16.setLocation(160, 510);
-        triMap.put(16, tri16);
+        } if (i%2 != 0) {
+            tri.setBackground(Color.orange);
+        }
+        tri.setEnabled(true);
+        tri.setSize(new Dimension(50, 200));
+        if (i <= 6 || i >= 19) {
+            c = 110;
+        } else {
+            c = 10;
+        }
+        if (i <= 12) {
+            x = ((12 - i)*50) + c;
+            y = 10;
+        } else {
+            x = ((i - 13)*50) + c;
+            y = 510;
+        }
+        tri.setLocation(x, y);
+        triMap.put(i, tri);
     }
 
 
-    public void triPanel8SetUp() {
 
-        tri8 = new JPanel();
-        tri8.setLayout(new BoxLayout(tri8, BoxLayout.Y_AXIS));
-        tri8.setBackground(Color.lightGray);
-        tri8.setEnabled(true);
-        tri8.setSize(new Dimension(50, 200));
-        tri8.setLocation(210, 10);
-        triMap.put(8, tri8);
-    }
-
-    public void triPanel17SetUp() {
-
-        tri17 = new JPanel();
-        tri17.setLayout(new BoxLayout(tri17, BoxLayout.Y_AXIS));
-        tri17.setBackground(Color.orange);
-        tri17.setEnabled(true);
-        tri17.setSize(new Dimension(50, 200));
-        tri17.setLocation(210, 510);
-        triMap.put(17, tri17);
-    }
-
-
-    public void triPanel7SetUp() {
-
-        tri7 = new JPanel();
-        tri7.setLayout(new BoxLayout(tri7, BoxLayout.Y_AXIS));
-        tri7.setBackground(Color.orange);
-        tri7.setEnabled(true);
-        tri7.setSize(new Dimension(50, 200));
-        tri7.setLocation(260, 10);
-        triMap.put(7, tri7);
-    }
-
-
-    public void triPanel18SetUp() {
-
-        tri18 = new JPanel();
-        tri18.setLayout(new BoxLayout(tri18, BoxLayout.Y_AXIS));
-        tri18.setBackground(Color.lightGray);
-        tri18.setEnabled(true);
-        tri18.setSize(new Dimension(50, 200));
-        tri18.setLocation(260, 510);
-        triMap.put(18, tri18);
-    }
-
-
-    public void triPanel6SetUp() {
-
-        tri6 = new JPanel();
-        tri6.setLayout(new BoxLayout(tri6, BoxLayout.Y_AXIS));
-        tri6.setBackground(Color.lightGray);
-        tri6.setEnabled(true);
-        tri6.setSize(new Dimension(50, 200));
-        tri6.setLocation(410, 10);
-        triMap.put(6, tri6);
-    }
-
-
-    public void triPanel19SetUp() {
-
-        tri19 = new JPanel();
-        tri19.setLayout(new BoxLayout(tri19, BoxLayout.Y_AXIS));
-        tri19.setBackground(Color.orange);
-        tri19.setEnabled(true);
-        tri19.setSize(new Dimension(50, 200));
-        tri19.setLocation(410, 510);
-        triMap.put(19, tri19);
-    }
-
-    public void triPanel5SetUp() {
-
-        tri5 = new JPanel();
-        tri5.setLayout(new BoxLayout(tri5, BoxLayout.Y_AXIS));
-        tri5.setBackground(Color.orange);
-        tri5.setEnabled(true);
-        tri5.setSize(new Dimension(50, 200));
-        tri5.setLocation(460, 10);
-        triMap.put(5, tri5);
-    }
-
-    public void triPanel20SetUp() {
-
-        tri20 = new JPanel();
-        tri20.setLayout(new BoxLayout(tri20, BoxLayout.Y_AXIS));
-        tri20.setBackground(Color.lightGray);
-        tri20.setEnabled(true);
-        tri20.setSize(new Dimension(50, 200));
-        tri20.setLocation(460, 510);
-        triMap.put(20, tri20);
-    }
-
-    public void triPanel4SetUp() {
-
-        tri4 = new JPanel();
-        tri4.setLayout(new BoxLayout(tri4, BoxLayout.Y_AXIS));
-        tri4.setBackground(Color.lightGray);
-        tri4.setEnabled(true);
-        tri4.setSize(new Dimension(50, 200));
-        tri4.setLocation(510, 10);
-        triMap.put(4, tri4);
-    }
-
-    public void triPanel21SetUp() {
-
-        tri21 = new JPanel();
-        tri21.setLayout(new BoxLayout(tri21, BoxLayout.Y_AXIS));
-        tri21.setBackground(Color.orange);
-        tri21.setEnabled(true);
-        tri21.setSize(new Dimension(50, 200));
-        tri21.setLocation(510, 510);
-        triMap.put(21, tri21);
-    }
-
-    public void triPanel3SetUp() {
-
-        tri3 = new JPanel();
-        tri3.setLayout(new BoxLayout(tri3, BoxLayout.Y_AXIS));
-        tri3.setBackground(Color.orange);
-        tri3.setEnabled(true);
-        tri3.setSize(new Dimension(50, 200));
-        tri3.setLocation(560, 10);
-        triMap.put(3, tri3);
-    }
-
-    public void triPanel22SetUp() {
-
-        tri22 = new JPanel();
-        tri22.setLayout(new BoxLayout(tri22, BoxLayout.Y_AXIS));
-        tri22.setBackground(Color.lightGray);
-        tri22.setEnabled(true);
-        tri22.setSize(new Dimension(50, 200));
-        tri22.setLocation(560, 510);
-        triMap.put(22, tri22);
-    }
-
-
-    public void triPanel2SetUp() {
-
-        tri2 = new JPanel();
-        tri2.setLayout(new BoxLayout(tri2, BoxLayout.Y_AXIS));
-        tri2.setBackground(Color.lightGray);
-        tri2.setEnabled(true);
-        tri2.setSize(new Dimension(50, 200));
-        tri2.setLocation(610, 10);
-        triMap.put(2, tri2);
-    }
-
-
-    public void triPanel23SetUp() {
-
-        tri23 = new JPanel();
-        tri23.setLayout(new BoxLayout(tri23, BoxLayout.Y_AXIS));
-        tri23.setBackground(Color.orange);
-        tri23.setEnabled(true);
-        tri23.setSize(new Dimension(50, 200));
-        tri23.setLocation(610, 510);
-        triMap.put(23, tri23);
-    }
-
-    public void triPanel1SetUp() {
-
-        tri1 = new JPanel();
-        tri1.setLayout(new BoxLayout(tri1, BoxLayout.Y_AXIS));
-        tri1.setBackground(Color.orange);
-        tri1.setEnabled(true);
-        tri1.setSize(new Dimension(50, 200));
-        tri1.setLocation(660, 10);
-        triMap.put(1, tri1);
-    }
-
-    public void triPanel24SetUp() {
-
-        tri24 = new JPanel();
-        tri24.setLayout(new BoxLayout(tri24, BoxLayout.Y_AXIS));
-        tri24.setBackground(Color.lightGray);
-        tri24.setEnabled(true);
-        tri24.setSize(new Dimension(50, 200));
-        tri24.setLocation(660, 510);
-        triMap.put(24, tri24);
-    }
-
-
-    public void leftBoardSetUp() {
+    private void leftBoardSetUp() {
         leftBoard = new JPanel();
         leftBoard.setLayout(new BoxLayout(leftBoard, BoxLayout.Y_AXIS));
         leftBoard.setBackground(Color.darkGray);
@@ -446,7 +236,7 @@ public class Model {
 
     }
 
-    public void barBoardSetUp() {
+    private void barBoardSetUp() {
         barBoard = new JPanel();
         barBoard.setLayout(new BoxLayout(barBoard, BoxLayout.Y_AXIS));
         barBoard.setBackground(Color.gray);
@@ -455,7 +245,7 @@ public class Model {
         barBoard.setLocation(310, 10);
     }
 
-    public void rightBoardSetUp() {
+    private void rightBoardSetUp() {
         rightBoard = new JPanel();
         rightBoard.setLayout(new BoxLayout(rightBoard, BoxLayout.Y_AXIS));
         rightBoard.setBackground(Color.darkGray);
@@ -465,7 +255,7 @@ public class Model {
     }
 
 
-    public void frameSetUp() {
+   private void frameSetUp() {
         frame = new JFrame("Backgammon Table");
         frame.setLayout(null);
         frame.getContentPane().setLayout(new BorderLayout());
@@ -474,7 +264,7 @@ public class Model {
         frame.setLocation(500, 500);
     }
 
-    public void diceFrameSetUp() {
+    void diceFrameSetUp() {
         diceFrame = new JFrame("Dice");
         diceFrame.setLayout(null);
         diceFrame.getContentPane().setLayout(new BorderLayout());
@@ -492,7 +282,7 @@ public class Model {
         diceFrame.add(dicePanel);
     }
 
-    public void statsFrameSetUp() {
+    void statsFrameSetUp() {
         statsFrame = new JFrame("Tournament Statistics");
         statsFrame.setLayout(null);
         statsFrame.getContentPane().setLayout(new BorderLayout());
@@ -534,46 +324,24 @@ public class Model {
     }
 
 
-
-// TODO: create a for/while loop for adding objects to the bigBoard. Collapse 24 statements into 1. To accomplish, create
-    // TODO: array of tri places.
-    public void bigBoardSetUp() {
+    // MODIFIES: model
+    // EFFECTS: sets up the components of the backgammon board (not pieces or specific triangles)
+    void bigBoardSetUp() {
         bigBoard = new JPanel();
         bigBoard.setLayout(null);
         bigBoard.add(leftBoard);
         bigBoard.add(barBoard);
         bigBoard.add(rightBoard);
-        bigBoard.add(tri1);
-        bigBoard.add(tri2);
-        bigBoard.add(tri3);
-        bigBoard.add(tri4);
-        bigBoard.add(tri5);
-        bigBoard.add(tri6);
-        bigBoard.add(tri19);
-        bigBoard.add(tri20);
-        bigBoard.add(tri21);
-        bigBoard.add(tri22);
-        bigBoard.add(tri23);
-        bigBoard.add(tri24);
-        bigBoard.add(tri7);
-        bigBoard.add(tri8);
-        bigBoard.add(tri9);
-        bigBoard.add(tri10);
-        bigBoard.add(tri11);
-        bigBoard.add(tri12);
-        bigBoard.add(tri13);
-        bigBoard.add(tri14);
-        bigBoard.add(tri15);
-        bigBoard.add(tri16);
-        bigBoard.add(tri17);
-        bigBoard.add(tri18);
+        for (int i = 0; i < triArray.length; i++) {
+            bigBoard.add(triArray[i]);
+        }
         bigBoard.setOpaque(true);
     }
 
 
     // MODIFIES: model
     // EFFECTS: clears the board - used to give impression of movement
-    public void clearBoard() {
+    void clearBoard() {
         for (Triangle t: board.getTriangleList()) {
             int triNum = t.getPosition();
             JPanel wantedTri = triMap.get(triNum);
@@ -594,8 +362,9 @@ public class Model {
         barBoard.repaint();
     }
 
-
-    public void piecesSetUp() {
+    // modifies: model
+    // effects: sets pieces onto the board
+    void piecesSetUp() {
         for (Triangle t: board.getTriangleList()) {
             int triNum = t.getPosition();
             JPanel wantedTri = triMap.get(triNum);
@@ -639,42 +408,31 @@ public class Model {
     }
 
 
-    //public Board getBoard() {return board;}
-
-    public String getPieceNumber() {
+    String getPieceNumber() {
         return pieceNumber;
     }
 
-    public String getPositionNumber() {
+    String getPositionNumber() {
         return positionNumber; }
 
 
-    public String getColor() {
+    String getColor() {
         return color;
     }
 
-    public int getValue() {
+    int getValue() {
         return value;
     }
 
-    public JFrame getFrame() {return frame;}
+    JFrame getFrame() {return frame;}
 
-    public JFrame getDiceFrame() {return diceFrame;}
+    JFrame getDiceFrame() {return diceFrame;}
 
-    public JFrame getStatsFrame() {return statsFrame;}
+    JFrame getStatsFrame() {return statsFrame;}
 
-    //public JPanel getLeftBoard() {return leftBoard;}
+    JPanel getBigBoard() {return bigBoard;}
 
-    //public JPanel getBarBoard() {return barBoard;}
-
-    //public JPanel getRightBoard() {return rightBoard;}
-
-    public JPanel getBigBoard() {return bigBoard;}
-
-
-
-
-    public void createBoard() {
+    void createBoard() {
         turn = 0;
         value = 1;
         game++;
@@ -709,7 +467,7 @@ public class Model {
 
     // Modifies: dice, players' turn.
     // EFFECTS: produces 2 dice (i.e. randomly selects 2 numbers, each btw 1 and 6), cycles players turn
-    public void rollDie() {
+    void rollDie() {
         if (turn%2 == 0) {
             color = "black";
         } else if (turn%2 == 1) {
@@ -723,57 +481,35 @@ public class Model {
 
     // MODIFIES: board, piece
     // EFFECT: moves piece to indicated position, unless such move would conflict w/ rules of game
-    public void movePiece() {
+    void movePiece() {
         if (numMoves > 0) {
 
             int pieceNumber = Integer.parseInt(getPieceNumber());
             int positionNumber;
 
             try {
-
                 Piece chosenPiece = board.getPiece(color, pieceNumber);
-
                 int distance = Integer.parseInt(getPositionNumber());
-
                 if (color == "white") {
-
                     positionNumber = chosenPiece.getPlace().getPosition() + distance;
-
                     if (positionNumber > 25) {
-
                         positionNumber = 25;
                     }
 
                 } else {
-
                     if (chosenPiece.getPlace().getPosition() == 0) {
-
                         positionNumber = 25 - distance;
-
                     } else {
-
                     positionNumber = chosenPiece.getPlace().getPosition() - distance;
-
                     if (positionNumber < 1) {
-
                         positionNumber = 25;
                     }
-
                     }
                 }
 
-//                if (!diceList.contains(distance)) {
-//
-//                    JOptionPane.showMessageDialog(null, "Move does not correspond to dice: " + diceList);
-//
-//                }
-
                 if (positionNumber < 25) {
-
                         try {
-
                             if (diceList.contains(distance)) {
-
                                 board.movePiece(chosenPiece, board.getTriangle(positionNumber));
                                 diceList.remove(Integer.valueOf(distance));
                                 numMoves--;
@@ -781,76 +517,50 @@ public class Model {
                                         + "piece " + pieceNumber +
                                         " moved to position " + positionNumber);
                             } else {
-
                                 JOptionPane.showMessageDialog(null, "Move does not correspond to dice: " + diceList);
 
                             }
-
                         } catch (BlockedMove | PieceOnBarException | NoSuchTriangleNumber e) {
-
                             JOptionPane.showMessageDialog(null, e.getMessage());
                         }
 
                     } if (positionNumber >= 25) {
-
                         try {
-
-
                             if (diceList.contains(distance)) {
-
                                 board.movePieceOffBoard(chosenPiece);
                                 diceList.remove(Integer.valueOf(distance));
                                 numMoves--;
                                 JOptionPane.showMessageDialog(null, color
                                         + "piece " + pieceNumber +
                                         " successfully moved off the board");
-
                                 if (board.win(chosenPiece)) {
-
                                     if (color == "white") {
-
                                         whitePoints += value;
-
                                     } else {
-
                                         blackPoints += value;
                                     }
-
                                     JOptionPane.showMessageDialog(null, color +
                                             " has won the game worth " + value + " point(s)");
                                 }
-
                             } else {
-
                                 JOptionPane.showMessageDialog(null, "Move does not correspond to dice: " + diceList);
-
                             }
 
                         } catch (InvalidOffBoardRequest e) {
-
                             JOptionPane.showMessageDialog(null, e.getMessage());
                         }
-
                     }
-
             } catch (NoSuchPieceNumber e) {
-                //TODO: print out exception message
-                //JOptionPane.showMessageDialog(null, e.getMessage());
             }
-
         } JOptionPane.showMessageDialog(null, color + " has " + numMoves + " moves remaining: " + diceList);
-
         if (numMoves == 0) {
-
             JOptionPane.showMessageDialog(null, "out of turns.");
             diceFrame.dispose();
-            //turn++;
-
         }
     }
 
 
-    public void skipTurn() {
+    void skipTurn() {
         turn++;
         if (turn%2 == 0) {
             color = "black";
@@ -862,9 +572,9 @@ public class Model {
 
 
 
-    public void moveRecomm() {}
+    void moveRecomm() {}
 
-    public void doubleGame() {
+    void doubleGame() {
         if (prevOfferor == color) {
             JOptionPane.showMessageDialog(null, "Player cannot make two/more consecutive " +
                     "offers to double game's value.");
@@ -873,18 +583,17 @@ public class Model {
         prevOfferor = color;}
     }
 
-    public void setPieceNumber(String pieceNumber) {
+    void setPieceNumber(String pieceNumber) {
         this.pieceNumber = pieceNumber;
     }
 
-    public void setPositionNumber(String positionNumber) {
+    void setPositionNumber(String positionNumber) {
         this.positionNumber = positionNumber;
     }
 
-    public List<Integer> getDiceList() {
+    List<Integer> getDiceList() {
         return diceList;
     }
-
 
 
 }

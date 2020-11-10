@@ -129,8 +129,6 @@ public class Board {
     }
 
 
-    //REQUIRES:
-    //MODIFIES:
     //EFFECTS: returns true if player has won the game.
 
     public Boolean win(Piece piece) {
@@ -145,8 +143,7 @@ public class Board {
     }
 
 
-    //REQUIRES:
-    //MODIFIES:
+
     //EFFECTS: returns true if can move pieces offBoard.
     public Boolean canMoveOffBoard(Piece piece) {
         boolean allStatusHome = true;
@@ -171,7 +168,6 @@ public class Board {
 
     }
 
-    //REQUIRES:
     //MODIFIES: piece, this
     //EFFECTS: moves a piece to the offBoard position of the board.
 
@@ -191,7 +187,6 @@ public class Board {
 
 
 
-    //REQUIRES:
     //MODIFIES: Piece, this (board)
     //EFFECTS: moves a piece to indicated position (if valid). Throw relevant exception if not valid.
 

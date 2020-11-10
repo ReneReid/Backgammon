@@ -141,19 +141,6 @@ public class BoardTest {
         }
     }
 
-/*    @Test
-    public void testGetPieceColorExceptionThrown() {
-        try {
-
-            board.getPiece("green", 1);
-            fail();
-        } catch (NoSuchPieceColor e) {
-            e.getMessage();
-
-        } catch (NoSuchPieceNumber e) {
-            fail();
-        }
-    }*/
 
 
     @Test

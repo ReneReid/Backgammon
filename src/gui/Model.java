@@ -13,189 +13,71 @@ public class Model {
 
     HashMap<Integer, JPanel> triMap = new HashMap<Integer, JPanel>();
 
-    private int game;
-    private int turn;
-    private int value;
-    private String color = "white";
-    private String prevOfferor = "none";
-    private int blackPoints = 0;
-    private int whitePoints = 0;
+    private int game, turn, value, numMoves, blackPoints = 0, whitePoints = 0;
+    private String pieceNumber, positionNumber, color = "white", prevOfferor = "none";
 
     private List<Integer> diceList;
-    private int numMoves;
 
-    private String pieceNumber;
-    private String positionNumber;
+    private Triangle triangle1 = new Triangle(1), triangle2 = new Triangle(2), triangle3 = new Triangle(3),
+            triangle4 = new Triangle(4), triangle5 = new Triangle(5), triangle6 = new Triangle(6),
+            triangle7 = new Triangle(7), triangle8 = new Triangle(8), triangle9 = new Triangle(9),
+            triangle10 = new Triangle(10), triangle11 = new Triangle(11), triangle12 = new Triangle(12),
+            triangle13 = new Triangle(13), triangle14 = new Triangle(14), triangle15 = new Triangle(15),
+            triangle16 = new Triangle(16), triangle17 = new Triangle(17), triangle18 = new Triangle(18),
+            triangle19 = new Triangle(19), triangle20 = new Triangle(20), triangle21 = new Triangle(21),
+            triangle22 = new Triangle(22), triangle23 = new Triangle(23), triangle24 = new Triangle(24);
+
+    private WhitePiece whitePiece1 = new WhitePiece(1, triangle1), whitePiece2 = new WhitePiece(2, triangle1),
+            whitePiece3 = new WhitePiece(3, triangle12), whitePiece4 = new WhitePiece(4, triangle12),
+            whitePiece5 = new WhitePiece(5, triangle12), whitePiece6 = new WhitePiece(6, triangle12),
+            whitePiece7 = new WhitePiece(7, triangle12), whitePiece8 = new WhitePiece(8, triangle17),
+            whitePiece9 = new WhitePiece(9, triangle17), whitePiece10 = new WhitePiece(10, triangle17),
+            whitePiece11 = new WhitePiece(11, triangle19), whitePiece12 = new WhitePiece(12, triangle19),
+            whitePiece13 = new WhitePiece(13, triangle19), whitePiece14 = new WhitePiece(14, triangle19),
+            whitePiece15 = new WhitePiece(15, triangle19);
+
+    private BlackPiece blackPiece1 = new BlackPiece(1, triangle24), blackPiece2 = new BlackPiece(2, triangle24),
+            blackPiece3 = new BlackPiece(3, triangle13), blackPiece4 = new BlackPiece(4, triangle13),
+            blackPiece5 = new BlackPiece(5, triangle13), blackPiece6 = new BlackPiece(6, triangle13),
+            blackPiece7 = new BlackPiece(7, triangle13), blackPiece8 = new BlackPiece(8, triangle8),
+            blackPiece9 = new BlackPiece(9, triangle8), blackPiece10 = new BlackPiece(10, triangle8),
+            blackPiece11 = new BlackPiece(11, triangle6), blackPiece12 = new BlackPiece(12, triangle6),
+            blackPiece13 = new BlackPiece(13, triangle6), blackPiece14 = new BlackPiece(14, triangle6),
+            blackPiece15 = new BlackPiece(15, triangle6);
 
 
-    private Triangle triangle1 = new Triangle(1);
-    private Triangle triangle2 = new Triangle(2);
-    private Triangle triangle3 = new Triangle(3);
-    private Triangle triangle4 = new Triangle(4);
-    private Triangle triangle5 = new Triangle(5);
-    private Triangle triangle6 = new Triangle(6);
-    private Triangle triangle7 = new Triangle(7);
-    private Triangle triangle8 = new Triangle(8);
-    private Triangle triangle9 = new Triangle(9);
-    private Triangle triangle10 = new Triangle(10);
-    private Triangle triangle11 = new Triangle(11);
-    private Triangle triangle12 = new Triangle(12);
-    private Triangle triangle13 = new Triangle(13);
-    private Triangle triangle14 = new Triangle(14);
-    private Triangle triangle15 = new Triangle(15);
-    private Triangle triangle16 = new Triangle(16);
-    private Triangle triangle17 = new Triangle(17);
-    private Triangle triangle18 = new Triangle(18);
-    private Triangle triangle19 = new Triangle(19);
-    private Triangle triangle20 = new Triangle(20);
-    private Triangle triangle21 = new Triangle(21);
-    private Triangle triangle22 = new Triangle(22);
-    private Triangle triangle23 = new Triangle(23);
-    private Triangle triangle24 = new Triangle(24);
+    private JPanel leftBoard, barBoard, rightBoard, bigBoard;
+    private JFrame frame, diceFrame, statsFrame;
 
-    private WhitePiece whitePiece1 = new WhitePiece(1, triangle1);
-    private WhitePiece whitePiece2 = new WhitePiece(2, triangle1);
-    private WhitePiece whitePiece3 = new WhitePiece(3, triangle12);
-    private WhitePiece whitePiece4 = new WhitePiece(4, triangle12);
-    private WhitePiece whitePiece5 = new WhitePiece(5, triangle12);
-    private WhitePiece whitePiece6 = new WhitePiece(6, triangle12);
-    private WhitePiece whitePiece7 = new WhitePiece(7, triangle12);
-    private WhitePiece whitePiece8 = new WhitePiece(8, triangle17);
-    private WhitePiece whitePiece9 = new WhitePiece(9, triangle17);
-    private WhitePiece whitePiece10 = new WhitePiece(10, triangle17);
-    private WhitePiece whitePiece11 = new WhitePiece(11, triangle19);
-    private WhitePiece whitePiece12 = new WhitePiece(12, triangle19);
-    private WhitePiece whitePiece13 = new WhitePiece(13, triangle19);
-    private WhitePiece whitePiece14 = new WhitePiece(14, triangle19);
-    private WhitePiece whitePiece15 = new WhitePiece(15, triangle19);
-    private BlackPiece blackPiece1 = new BlackPiece(1, triangle24);
-    private BlackPiece blackPiece2 = new BlackPiece(2, triangle24);
-    private BlackPiece blackPiece3 = new BlackPiece(3, triangle13);
-    private BlackPiece blackPiece4 = new BlackPiece(4, triangle13);
-    private BlackPiece blackPiece5 = new BlackPiece(5, triangle13);
-    private BlackPiece blackPiece6 = new BlackPiece(6, triangle13);
-    private BlackPiece blackPiece7 = new BlackPiece(7, triangle13);
-    private BlackPiece blackPiece8 = new BlackPiece(8, triangle8);
-    private BlackPiece blackPiece9 = new BlackPiece(9, triangle8);
-    private BlackPiece blackPiece10 = new BlackPiece(10, triangle8);
-    private BlackPiece blackPiece11 = new BlackPiece(11, triangle6);
-    private BlackPiece blackPiece12 = new BlackPiece(12, triangle6);
-    private BlackPiece blackPiece13 = new BlackPiece(13, triangle6);
-    private BlackPiece blackPiece14 = new BlackPiece(14, triangle6);
-    private BlackPiece blackPiece15 = new BlackPiece(15, triangle6);
+    private JPanel tri1 = new JPanel(), tri2 = new JPanel(), tri3 = new JPanel(), tri4 = new JPanel(),
+            tri5 = new JPanel(), tri6 = new JPanel(), tri7 = new JPanel(), tri8 = new JPanel(), tri9 = new JPanel(),
+            tri10 = new JPanel(), tri11 = new JPanel(), tri12 = new JPanel(), tri13 = new JPanel(),
+            tri14 = new JPanel(), tri15 = new JPanel(), tri16 = new JPanel(), tri17 = new JPanel(), tri18 = new JPanel(),
+            tri19 = new JPanel(), tri20 = new JPanel(), tri21 = new JPanel(), tri22 = new JPanel(), tri23 = new JPanel(),
+            tri24 = new JPanel();
 
-    private JPanel leftBoard;
-    private JPanel barBoard;
-    private JPanel rightBoard;
-    private JPanel bigBoard;
-    private JFrame frame;
-    private JFrame diceFrame;
-    private JFrame statsFrame;
-
-    private JPanel tri1 = new JPanel();
-    private JPanel tri2 = new JPanel();
-    private JPanel tri3 = new JPanel();
-    private JPanel tri4 = new JPanel();
-    private JPanel tri5 = new JPanel();
-    private JPanel tri6 = new JPanel();
-    private JPanel tri7 = new JPanel();
-    private JPanel tri8 = new JPanel();
-    private JPanel tri9 = new JPanel();
-    private JPanel tri10 = new JPanel();
-    private JPanel tri11 = new JPanel();
-    private JPanel tri12 = new JPanel();
-    private JPanel tri13 = new JPanel();
-    private JPanel tri14 = new JPanel();
-    private JPanel tri15 = new JPanel();
-    private JPanel tri16 = new JPanel();
-    private JPanel tri17 = new JPanel();
-    private JPanel tri18 = new JPanel();
-    private JPanel tri19 = new JPanel();
-    private JPanel tri20 = new JPanel();
-    private JPanel tri21 = new JPanel();
-    private JPanel tri22 = new JPanel();
-    private JPanel tri23 = new JPanel();
-    private JPanel tri24 = new JPanel();
-
+    private JPanel[] triArray = {tri1, tri2, tri3, tri4, tri5, tri6, tri7, tri8, tri9, tri10, tri11, tri12, tri13,
+            tri14, tri15, tri16, tri17, tri18, tri19, tri20, tri21, tri22, tri23, tri24};
 
     private Board board = new Board();
 
     public Model(String pieceNumber, String positionNumber) {
         this.pieceNumber = pieceNumber;
         this.positionNumber = positionNumber;
-        //triPanelSetUp(triArray);
-        triPanelSetUpp(tri1, 1);
-        triPanelSetUpp(tri2, 2);
-        triPanelSetUpp(tri3, 3);
-        triPanelSetUpp(tri4, 4);
-        triPanelSetUpp(tri5, 5);
-        triPanelSetUpp(tri6, 6);
-        triPanelSetUpp(tri7, 7);
-        triPanelSetUpp(tri8, 8);
-        triPanelSetUpp(tri9, 9);
-        triPanelSetUpp(tri10, 10);
-        triPanelSetUpp(tri11, 11);
-        triPanelSetUpp(tri12, 12);
-        triPanelSetUpp(tri13, 13);
-        triPanelSetUpp(tri14, 14);
-        triPanelSetUpp(tri15, 15);
-        triPanelSetUpp(tri16, 16);
-        triPanelSetUpp(tri17, 17);
-        triPanelSetUpp(tri18, 18);
-        triPanelSetUpp(tri19, 19);
-        triPanelSetUpp(tri20, 20);
-        triPanelSetUpp(tri21, 21);
-        triPanelSetUpp(tri22, 22);
-        triPanelSetUpp(tri23, 23);
-        triPanelSetUpp(tri24, 24);
+        int i = 1;
+        for (JPanel j: triArray) {
+            triPanelSetUp(j, i);
+            i++;
+        }
         leftBoardSetUp();
         barBoardSetUp();
         rightBoardSetUp();
         bigBoardSetUp();
         frameSetUp();
-
     }
 
-
-    private JPanel[] triArray = {tri1, tri2, tri3, tri4, tri5, tri6, tri7, tri8, tri9, tri10, tri11, tri12, tri13,
-            tri14, tri15, tri16, tri17, tri18, tri19, tri20, tri21, tri22, tri23, tri24};
-
-
-    //TODO: trouble shoot null pointer exception when below function run so that
-    // can collapse number of triPanel set up calls.
-//    private void triPanelSetUp(JPanel[] jArray) {
-//        int x;
-//        int y;
-//        int c;
-//        for (int i = 0; i < jArray.length; i++) {
-//            jArray[i].setLayout(new BoxLayout(jArray[i], BoxLayout.Y_AXIS));
-//            if (i%2 == 0) {
-//                jArray[i].setBackground(Color.lightGray);
-//            } else {
-//                jArray[i].setBackground(Color.orange);
-//            }
-//            jArray[i].setEnabled(true);
-//            jArray[i].setSize(new Dimension(50, 200));
-//            if (i <= 6 || i >= 19) {
-//                c = 110;
-//            } else {
-//                c = 10;
-//            }
-//            if (i <= 12) {
-//                x = ((12 - i)*50) + c;
-//                y = 10;
-//            } else {
-//                x = ((i - 13)*50) + c;
-//                y = 510;
-//            }
-//            jArray[i].setLocation(x, y);
-//            triMap.put(i, jArray[i]);
-//        }
-//    }
-
-
     // EFFECTS: currently sets up the triangles' parameters and sets them to the board.
-    private void triPanelSetUpp(JPanel tri, int i) {
+    private void triPanelSetUp(JPanel tri, int i) {
         int x;
         int y;
         int c;
@@ -223,8 +105,6 @@ public class Model {
         tri.setLocation(x, y);
         triMap.put(i, tri);
     }
-
-
 
     private void leftBoardSetUp() {
         leftBoard = new JPanel();
@@ -295,32 +175,25 @@ public class Model {
         statsPanel.setEnabled(true);
         statsPanel.setSize(300, 200);
 
-        String val = "Game value currently: " + value;
+        String val = "Current game value: " + value + "points.";
         String prevO =  prevOfferor + " previously doubled game points.";
         String bTotal = "black total points: " + blackPoints;
         String wTotal = "white total points: " + whitePoints;
 
-        JLabel valLabel = new JLabel(val);
-        JLabel prevOLabel = new JLabel(prevO);
-        JLabel bTotLabel = new JLabel(bTotal);
-        JLabel wTotLabel = new JLabel(wTotal);
+        JLabel valLabel = new JLabel(val), prevOLabel = new JLabel(prevO), bTotLabel = new JLabel(bTotal),
+                wTotLabel = new JLabel(wTotal);
 
         String turns = "Turn number: " + turn;
         JLabel turnsLabel = new JLabel(turns);
-
         String gameNum = "Game number: " + game;
         JLabel gameNumLabel = new JLabel(gameNum);
-
-
         statsPanel.add(valLabel);
         statsPanel.add(prevOLabel);
         statsPanel.add(bTotLabel);
         statsPanel.add(wTotLabel);
         statsPanel.add(turnsLabel);
         statsPanel.add(gameNumLabel);
-
         statsFrame.add(statsPanel);
-
     }
 
 
@@ -517,7 +390,8 @@ public class Model {
                                         + "piece " + pieceNumber +
                                         " moved to position " + positionNumber);
                             } else {
-                                JOptionPane.showMessageDialog(null, "Move does not correspond to dice: " + diceList);
+                                JOptionPane.showMessageDialog(null,
+                                        "Move does not correspond to dice: " + diceList);
 
                             }
                         } catch (BlockedMove | PieceOnBarException | NoSuchTriangleNumber e) {
@@ -543,7 +417,8 @@ public class Model {
                                             " has won the game worth " + value + " point(s)");
                                 }
                             } else {
-                                JOptionPane.showMessageDialog(null, "Move does not correspond to dice: " + diceList);
+                                JOptionPane.showMessageDialog(null,
+                                        "Move does not correspond to dice: " + diceList);
                             }
 
                         } catch (InvalidOffBoardRequest e) {
@@ -552,7 +427,8 @@ public class Model {
                     }
             } catch (NoSuchPieceNumber e) {
             }
-        } JOptionPane.showMessageDialog(null, color + " has " + numMoves + " moves remaining: " + diceList);
+        } JOptionPane.showMessageDialog(null,
+                color + " has " + numMoves + " moves remaining: " + diceList);
         if (numMoves == 0) {
             JOptionPane.showMessageDialog(null, "out of turns.");
             diceFrame.dispose();
